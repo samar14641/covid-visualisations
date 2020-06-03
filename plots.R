@@ -7,7 +7,7 @@ hospitalisations <- rename(hospitalisations,
                            newHosp = `Total number of COVID patients in hospital today`,
                            netNewHosp = `Net new hospitalizations`,
                            fiveDayAvgNetNew = `5 day average of net new hospitalizations`,
-                           netNewICU = `Net New number ICU`) %>%  # col renames when reqd
+                           netNewICU = `Net New number ICU`) %>%  # col renamed when reqd
   select(-7, -8) %>%  # drop intubated cols
   mutate(Date = as.Date(Date, "%m/%d/%Y"), totHosp = cumsum(newHosp), totICU = cumsum(ICU))  # convert data, calc cumulative sums
 
