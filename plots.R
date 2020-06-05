@@ -43,17 +43,6 @@ scalePoints <- c(1, 10, 100, 1000, 10000, 100000)  # check options(scipen = 999)
 ggplot(cases, aes(x = Date, y = totPos)) + geom_line() + scale_y_log10(labels = scalePoints, breaks = scalePoints) + labs(x = "Date", y = "Total Positive Cases", title = "Total Positive Cases (log10 scale)")
 
 summed <- group_by(cases, day) %>% summarise(newCases = sum(newPos))
-mutate(summed, day = factor(day, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))) %>% 
-  ggplot(aes(x = day, y = newCases)) + geom_col(aes(fill = newCases >= median(newCases))) + geom_abline(slope = 0, intercept = median(summed$newCases))  # clear proof for testing lag on weekends
-
-
-
-
-
-
-
-
-
-
-
-
+mutate(summed, day = factor(day, levels = rev(c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")))) %>% 
+  ggplot(aes(x = day, y = newCases)) + geom_col(aes(fill = newCases <= mean(newCases))) + geom_abline(slope = 0, intercept = mean(summed$newCases)) + scale_fill_manual(values = c("blue", "maroon")) + labs(x = "Day", y = "Total New Cases", title = "The Lag in Testing on the Weekend", fill = "Lag in\ntesting?") + coord_flip()  # clear proof for testing lag on weekends
+# scale_fill_discrete(labels = c("No", "Yes"))
