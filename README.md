@@ -1,5 +1,5 @@
 # covid-visualisations
-COVID-19 visualisations for Massachusetts (data until 18th May 2021, old format till 17th June 2020)
+COVID-19 visualisations for Massachusetts (data until 27th May 2021, old format till 17th June 2020)
 
 Data source: 
 
